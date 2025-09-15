@@ -124,4 +124,3 @@ def register_video_handlers(app: Client):
             await safe_telegram_call(cq.message.delete)
             if user_selections[chat_id][user_id]['queue']:
                 nxt = user_selections[chat_id][user_id]['queue'].pop(0)
-                await handle_message(client, nxt)
