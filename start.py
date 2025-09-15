@@ -46,8 +46,8 @@ def register_start_handlers(app: Client):
         # Main message
         caption = (
             f"<pre>Hᴇʏᴏ ᴄᴜᴛɪᴇ</pre>\n"
-            f"<b><blockquote>›› I’ᴍ ᴀ ᴄᴜᴛᴇ ᴀɴɪᴍᴇ ɴᴇᴡs ʙᴏᴛ ᴍᴀᴅᴇ ᴛᴏ sʜᴀʀᴇ ᴛʜᴇ ʟᴀᴛᴇsᴛ ᴜᴘᴅᴀᴛᴇs ᴡɪᴛʜ ʏᴏᴜʀ sᴘᴇᴄɪᴀʟ ᴀɴɪᴍᴇ ᴄʜᴀɴɴᴇʟ</b></blockquote>\n"
-            f"<b><blockquote>◈ <a href='https://t.me/ABHI_News'>ABHI : ᴡʜᴇʀᴇ ɴᴇᴡs ᴀʀɪsᴇ</a></b></blockquote>"
+            f"<b><blockquote>›› ɪ’ᴍ ᴀ ʜᴀɴᴅʏ ᴀᴜᴅɪᴏ ꜱᴇʟᴇᴄᴛᴏʀ ʙᴏᴛ ᴍᴀᴅᴇ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴄʜᴏᴏꜱᴇ ᴏʀ ʀᴇᴍᴏᴠᴇ ᴀᴜᴅɪᴏ ᴛʀᴀᴄᴋꜱ ꜰʀᴏᴍ ʏᴏᴜʀ ᴠɪᴅᴇᴏꜱ!</b></blockquote>\n"
+            f"<b><blockquote>◈ <a href='https://t.me/clutch008'>ABHI : ᴡʜᴇʀᴇ ᴀʀɪsᴇ</a></b></blockquote>"
         )
 
         if START_PIC:
@@ -76,12 +76,11 @@ def register_start_handlers(app: Client):
         ])
 
         about_caption = (
-            "<b><blockquote>Hᴇʏ ᴅᴇᴀʀ ᴍʏ ɴᴀᴍᴇ Fᴜʀɪɴᴀ</b></blockquote>\n"
-            f"<b><blockquote expandable>◈ Oᴡɴᴇʀ : <a href='https://t.me/clutch008'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
+            "<b><blockquote>Hᴇʏ ᴅᴇᴀʀ ᴍʏ ɴᴀᴍᴇ Iuno</b></blockquote>\n"
+            f"<b><blockquote>◈ Oᴡɴᴇʀ : <a href='https://t.me/clutch008'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
             f"◈ Dᴇᴠᴇʟᴏᴩᴇʀ : <a href='https://t.me/clutch008'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
-            f"◈ Mᴀɪɴ Cʜᴀɴɴᴇʟ : <a href='https://t.me/ABHI_News'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
-            f"◈ Eᴍɪɴᴇɴᴄᴇ Sᴏᴄɪᴇᴛʏ : <a href='https://t.me/Eminence_Society'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
-            f"◈ Uᴩᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ : <a href='https://t.me/EmitingStars_Botz'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a></b></blockquote>"
+            f"◈ Mᴀɪɴ Cʜᴀɴɴᴇʟ : <a href='https://t.me/+HzquTipfQsA1YWFl'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n"
+            f"◈ Uᴩᴅᴀᴛᴇs Cʜᴀɴɴᴇʟ : <a href='https://t.me/BOTSKINGDOMS'>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a></b></blockquote>"
         )
 
         await callback_query.message.edit_media(
