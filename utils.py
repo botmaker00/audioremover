@@ -101,6 +101,7 @@ async def download_with_progress(client: Client, message: Message, file_path: st
         if file_size and file_size > MAX_FILE_SIZE:
             raise ValueError(f"File too large: {file_size} bytes")
         bar, last_percent = None, user_selections[chat_id][user_id].get('last_percent', 0)
+        status_message_id = user_selections[chat_id][user_id].get('status_message_id')
         async def progress(cur, total):
             nonlocal bar, last_percent
             if not bar: bar = tqdm(total=total, unit='B', unit_scale=True, desc=f"Downloading {user_id}", leave=False)
@@ -110,12 +111,31 @@ async def download_with_progress(client: Client, message: Message, file_path: st
                 last_percent = percent
                 user_selections[chat_id][user_id]['last_percent'] = percent
                 pbar = "█" * (percent//5) + " " * (20-percent//5)
-                await update_status_message(client, chat_id, user_id, f"Downloading: [{pbar} {percent}%]")
+                await safe_telegram_call(
+                    client.edit_message_text,
+                    chat_id,
+                    status_message_id,
+                    f"Downloading: [{pbar} {percent}%]"
+                )
             if cur == total: bar.close()
-        return await client.download_media(message, file_path, progress=progress)
+        await client.download_media(message, file_path, progress=progress)
+        # Notify user after download completes
+        user = await client.get_users(user_id)
+        user_name = user.username if user.username else user.first_name
+        await safe_telegram_call(
+            client.send_message,
+            chat_id,
+            f"@{user_name} your media has been downloaded, now select the tracks.",
+            reply_to_message_id=message.id
+        )
     except Exception as e:
         logger.error(f"Download failed: {str(e)}")
-        await update_status_message(client, chat_id, user_id, f"Download failed: {str(e)}")
+        await safe_telegram_call(
+            client.edit_message_text,
+            chat_id,
+            status_message_id,
+            f"Download failed: {str(e)}"
+        )
         raise
 
 async def upload_with_progress(client: Client, chat_id: int, user_id: int, file_path: str, caption: str, output_format: str, thumb: str = None, reply_to_message_id: int = None):
@@ -141,10 +161,10 @@ async def upload_with_progress(client: Client, chat_id: int, user_id: int, file_
         await update_status_message(client, chat_id, user_id, f"Upload failed: {str(e)}")
         raise
 
-async def update_status_message(client: Client, chat_id: int, user_id: int, status: str):
+async def update_status_message(client: Client, chat_id: int, user_id: int, status: str, force_update: bool = False):
     try:
         now = datetime.now().timestamp()
-        if now - last_update_time[chat_id] < 10:
+        if not force_update and now - last_update_time[chat_id] < 5:  # Reduced from 10 to 5 seconds
             return
         last_update_time[chat_id] = now
         user_selections[chat_id][user_id]['status'] = status
